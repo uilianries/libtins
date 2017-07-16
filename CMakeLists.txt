@@ -2,6 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.1)
 PROJECT(libtins)
 
 # Load Conan setup after Conan install
+# This section to be externalized ASAP
 IF(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
     INCLUDE(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
     CONAN_BASIC_SETUP()
