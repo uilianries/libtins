@@ -1,4 +1,4 @@
-from conans import ConanFile, CMake
+from conans import ConanFile, CMake, tools
 
 class LibtinsConan(ConanFile):
     name = "libtins"
@@ -35,6 +35,10 @@ class LibtinsConan(ConanFile):
             self.requires.add("Boost/1.64.0@inexorgame/stable")
 
     def build(self):
+        conan_magic_lines = """PROJECT(libtins)
+    INCLUDE(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+    CONAN_BASIC_SETUP()"""
+        tools.replace_in_file("CMakeLists.txt", "PROJECT(libtins)", conan_magic_lines)
         cmake = CMake(self)
         cmake.definitions["LIBTINS_BUILD_SHARED"] = self.options.shared
         cmake.definitions["LIBTINS_ENABLE_PCAP"] = self.options.enable_pcap
