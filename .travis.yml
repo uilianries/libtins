@@ -16,6 +16,10 @@ addons:
     - libpcap-dev
     - libssl-dev
     - libboost-all-dev
+    
+install:
+  - chmod +x conan_scripts/install.sh
+  - ./conan_scripts/install.sh
 
 before_script:
   - mkdir build
@@ -25,3 +29,7 @@ before_script:
 
 script:
   - ctest -V
+  
+after_script:
+  - chmod +x conan_scripts/run.sh
+  - ./conan_scripts/run.sh

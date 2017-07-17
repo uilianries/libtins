@@ -20,6 +20,9 @@ install:
 - 7z x .\WpdPack_4_1_2.zip -oc:\
 - git submodule init
 - git submodule update
+- pip.exe install conan --upgrade
+- pip.exe install conan_package_tools
+- conan user
 before_build:
 - mkdir build
 - cd build
@@ -47,7 +50,9 @@ after_build:
 test_script:
 - cd c:\projects\libtins\build
 - ctest -C %Configuration% -V
+- python build.py
 deploy_script:
 - ps: Push-AppveyorArtifact "install\libtins-$env:Compiler-$env:Platform-$env:Configuration.zip"
+- cmd: python build.py
 skip_commits:
   message: /Update documentation.*/
